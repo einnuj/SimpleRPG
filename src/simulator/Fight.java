@@ -1,5 +1,7 @@
 package simulator;
 
+import background.actions.Action;
+import background.actions.MagicAction;
 import background.entities.Character;
 
 import java.util.ArrayList;
@@ -10,27 +12,47 @@ import java.util.ArrayList;
  * Created by Junnie on 12/10/2014.
  */
 public class Fight {
-    private Character[] controlled;
-    private Character[] computer;
+    private ArrayList<Character> controlled;
+    private ArrayList<Character> computer;
+    private ArrayList<Character> targets;
+    private Character self;
     private boolean turn;
+    private int defeatedControlled = 0;
+    private int defeatedComputer = 0;
 
 
     /** Getters & Setters **/
 
-    public Character[] getControlled() {
+    public ArrayList<Character> getControlled() {
         return controlled;
     }
 
-    public void setControlled(Character[] controlled) {
+    public void setControlled(ArrayList<Character> controlled) {
         this.controlled = controlled;
     }
 
-    public Character[] getComputer() {
+    public ArrayList<Character> getComputer() {
         return computer;
     }
 
-    public void setComputer(Character[] computer) {
+    public void setComputer(ArrayList<Character> computer) {
         this.computer = computer;
+    }
+
+    public ArrayList<Character> getTargets() {
+        return targets;
+    }
+
+    public void setTargets(ArrayList<Character> targets) {
+        this.targets = targets;
+    }
+
+    public void addTarget(Character c) {
+        targets.add(c);
+    }
+
+    public Character getSelf() {
+        return self;
     }
 
     public boolean isTurn() {
@@ -45,9 +67,17 @@ public class Fight {
         turn = !turn;
     }
 
+    public int getDefeatedControlled() {
+        return defeatedControlled;
+    }
+
+    public int getDefeatedComputer() {
+        return defeatedComputer;
+    }
+
     // Constructor
 
-    public Fight(Character[] newControlled, Character[] newComputers) {
+    public Fight(ArrayList<Character> newControlled, ArrayList<Character> newComputers) {
         controlled = newControlled;
         computer = newComputers;
         turn = false;
@@ -92,7 +122,6 @@ public class Fight {
      */
     public void printBattleMenu() {
         System.out.printf("Choose an option:\nFight\tItems\tEvade\tRun\n");
-        return;
     }
 
     /**
@@ -100,7 +129,6 @@ public class Fight {
      */
     public void printFightMenu() {
         System.out.printf("Fight:\nMelee\tMagic\n");
-        return;
     }
 
     /**
@@ -119,8 +147,6 @@ public class Fight {
             System.out.printf("%s\t", s);
             i++;
         }
-
-        return;
     }
 
     /**
@@ -139,58 +165,62 @@ public class Fight {
             System.out.printf("%s\t", s);
             i++;
         }
-
-        return;
     }
 
     /**
-     * A method that calculated whether or not a Fight's combatants on either side is wholly
-     * defeated.
+     * A method that calculates whether or not either party is completely dead.
      *
      * @return      -1 if Player loses, 1 if Computer is defeated, 0 otherwise.
      */
     public int isFightOver() {
-        boolean computerDefeated = false;
-        int i = 0;
 
-        /*
-        Loops through the Player's team and increments per Character defeated
-         */
-        for(Character c : controlled) {
-            if(c.getStats().gethP() == 0) {
-                i++;
+        for (Character c : controlled) {
+            if (c.getStats().gethP() == 0) {
+                defeatedControlled++;
             }
         }
 
-        /*
-        Returns -1 if all Player's Characters are defeated
-         */
-        if (i == controlled.length) {
+        if (defeatedControlled == controlled.size()) {
             return -1;
         }
 
-        // Resets the defeated counter
-        i = 0;
-
-        /*
-        Loops through the Computer's team and increments per Character defeated
-         */
-        for(Character c : computer) {
-            if(c.getStats().gethP() == 0) {
-                i++;
+        for (Character c : computer) {
+            if (c.getStats().gethP() == 0) {
+                defeatedComputer++;
             }
         }
 
-        /*
-        Returns 1 if all Computer's Characters are defeated
-         */
-        if (i == computer.length) {
+        if (defeatedComputer == computer.size()) {
             return 1;
         }
 
-        /*
-        Returns 0 if not all of one team is defeated
-         */
+        defeatedControlled = 0;
+        defeatedComputer = 0;
+
         return 0;
+    }
+
+    public void processFightAction(Action a) {
+        if (a instanceof MagicAction) {
+            updateEnergy(self, (MagicAction) a);
+        }
+
+        for (Character c : targets) {
+            updateHP(c, a);
+
+            if (c.getStats().gethP() <= 0) {
+                System.out.printf("%s has fallen!!\n", c.getName());
+            }
+
+            //@TODO: Implement Status Infliction
+        }
+    }
+
+    public void updateHP(Character c, Action a) {
+        c.getStats().sethP(c.getStats().gethP() - a.getDamage());
+    }
+
+    public void updateEnergy(Character c, MagicAction magicAction) {
+        c.getStats().setEnergy(c.getStats().getEnergy() - magicAction.getCost());
     }
 }

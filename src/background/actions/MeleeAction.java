@@ -8,16 +8,7 @@ import background.status.Effect;
  * Created by Junnie on 12/10/2014.
  */
 public abstract class MeleeAction extends Action{
-    private double multiplier;
     private MeleeName name;
-
-    public double getMultiplier() {
-        return multiplier;
-    }
-
-    public void setMultiplier(double multiplier) {
-        this.multiplier = multiplier;
-    }
 
     public MeleeName getName() {
         return name;

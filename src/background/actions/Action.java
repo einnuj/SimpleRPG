@@ -11,6 +11,8 @@ import java.util.ArrayList;
  */
 public abstract class Action {
     private Effect effect;
+    private TargetType targetType;
+    private double damage;
 
     public Effect getEffect() {
         return effect;
@@ -20,11 +22,19 @@ public abstract class Action {
         this.effect = effect;
     }
 
+    public TargetType getTargetType() {
+        return targetType;
+    }
 
-    /**
-     * This method, when invoked, will initiate the "Action" towards a target.
-     *
-     * @param chars         A list of characters that the action may target.
-     */
-    public abstract void activate(ArrayList<Character> chars);
+    public void setTargetType(TargetType targetType) {
+        this.targetType = targetType;
+    }
+
+    public double getDamage() {
+        return damage;
+    }
+
+    public void setDamage(double damage) {
+        this.damage = damage;
+    }
 }
