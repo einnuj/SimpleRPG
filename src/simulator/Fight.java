@@ -5,6 +5,7 @@ import background.actions.MagicAction;
 import background.entities.Character;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The main interface for controlling "fights" between entities.
@@ -12,9 +13,9 @@ import java.util.ArrayList;
  * Created by Junnie on 12/10/2014.
  */
 public class Fight {
-    private ArrayList<Character> controlled;
-    private ArrayList<Character> computer;
-    private ArrayList<Character> targets;
+    private List<Character> controlled;
+    private List<Character> computer;
+    private List<Character> targets;
     private Character self;
     private boolean turn;
     private int defeatedControlled = 0;
@@ -23,27 +24,27 @@ public class Fight {
 
     /** Getters & Setters **/
 
-    public ArrayList<Character> getControlled() {
+    public List<Character> getControlled() {
         return controlled;
     }
 
-    public void setControlled(ArrayList<Character> controlled) {
+    public void setControlled(List<Character> controlled) {
         this.controlled = controlled;
     }
 
-    public ArrayList<Character> getComputer() {
+    public List<Character> getComputer() {
         return computer;
     }
 
-    public void setComputer(ArrayList<Character> computer) {
+    public void setComputer(List<Character> computer) {
         this.computer = computer;
     }
 
-    public ArrayList<Character> getTargets() {
+    public List<Character> getTargets() {
         return targets;
     }
 
-    public void setTargets(ArrayList<Character> targets) {
+    public void setTargets(List<Character> targets) {
         this.targets = targets;
     }
 
@@ -77,7 +78,7 @@ public class Fight {
 
     // Constructor
 
-    public Fight(ArrayList<Character> newControlled, ArrayList<Character> newComputers) {
+    public Fight(List<Character> newControlled, List<Character> newComputers) {
         controlled = newControlled;
         computer = newComputers;
         turn = false;
@@ -91,8 +92,8 @@ public class Fight {
      * @param c     The Character from which to generate melee options
      * @return      A String populated array representing melee options
      */
-    public ArrayList<String> generateMeleeOptions(Character c) {
-        ArrayList<String> list = new ArrayList<String>();
+    public List<String> generateMeleeOptions(Character c) {
+        List<String> list = new ArrayList<String>();
 
         for (int i = 0; i < c.getMeleeActions().size(); i++) {
             list.add(c.getMeleeActions().get(i).getName().toString());
@@ -107,8 +108,8 @@ public class Fight {
      * @param c     The Character from which to generate magic options
      * @return      A String populated array representing magic options
      */
-    public ArrayList<String> generateMagicOptions(Character c) {
-        ArrayList<String> list = new ArrayList<String>();
+    public List<String> generateMagicOptions(Character c) {
+        List<String> list = new ArrayList<String>();
 
         for (int i = 0; i < c.getMagicActions().size(); i++) {
             list.add(c.getMagicActions().get(i).getName().toString());

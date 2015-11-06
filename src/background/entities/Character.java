@@ -5,6 +5,7 @@ import background.actions.MagicAction;
 import background.status.Stats;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -16,8 +17,8 @@ public abstract class Character {
     private CharacterType type;
     private String name;
     private Stats stats;
-    private ArrayList<MeleeAction> meleeActions;
-    private ArrayList<MagicAction> magicActions;
+    private List<MeleeAction> meleeActions;
+    private List<MagicAction> magicActions;
 
     public CharacterType getType() {
         return type;
@@ -43,7 +44,7 @@ public abstract class Character {
         this.stats = stats;
     }
 
-    public ArrayList<MeleeAction> getMeleeActions() {
+    public List<MeleeAction> getMeleeActions() {
         return meleeActions;
     }
 
@@ -55,7 +56,7 @@ public abstract class Character {
         this.meleeActions.add(meleeAction);
     }
 
-    public ArrayList<MagicAction> getMagicActions() {
+    public List<MagicAction> getMagicActions() {
         return magicActions;
     }
 

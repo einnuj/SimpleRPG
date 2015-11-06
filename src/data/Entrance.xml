@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Properties>
+    <Connection>
+        <Location_Name>Main Hall</Location_Name>
+        <Location_Direction>North</Location_Direction>
+    </Connection>
+    <Perceptions>
+        <Skill_One>There is a once-handsome dark oaken long table in
+        the center of this room of stone, the four walls barren. Five items lie
+            atop it: a looking glass, a pair of worn leather boots, a battered
+            blue book, a single iron bracer, and an impossibly
+            smooth pebble. A sourceless light shines down upon the table,
+            faintly illuminating the otherwise empty room.</Skill_One>
+    </Perceptions>
+    <Trigger>
+        <Pickup>
+            <Count>3</Count>
+            <Description> Your gaze unnaturally wanders across the
+            table to the far wall, resting on a redwood door. Its
+                golden doorknob called to you.</Description>
+        </Pickup>
+    </Trigger>
+</Properties>
