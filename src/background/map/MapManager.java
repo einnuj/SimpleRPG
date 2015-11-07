@@ -9,18 +9,10 @@ import java.util.Map;
  *
  * Created by Junnie on 10/8/2015.
  */
-public class MapManager {
-    private static MapManager ourInstance = new MapManager();
+public enum MapManager {
+    INSTANCE;
 
-    public static MapManager getInstance() {
-        return ourInstance;
-    }
+    private MapManager() {}
 
-    private Map<String, Object> map;
-
-    private MapManager() {
-        map = new HashMap<>(0);
-    }
-
-
+    public void init() {}
 }

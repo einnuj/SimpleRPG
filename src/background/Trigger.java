@@ -5,21 +5,19 @@ package background;
  *
  * Created by Junnie on 11/6/2015.
  */
-public class Trigger {
+public abstract class Trigger {
 
     // @TODO: this should be an enum with an outer selector
     private String type;
 
     // Essentially just a counter. Is this all that's necessary?
-    private int magnitude;
+    private int action_potential;
 
     // A description of what happens
     private String prose;
 
     /**
-     * This part is incredibly hard.
-     *
-     * @TODO: modular, unique event-reactions; giant switch statement pending
-     * certain kwargs?
+     * Defines the reaction once this class has been 'triggered'
      */
+    public abstract void reaction();
 }
